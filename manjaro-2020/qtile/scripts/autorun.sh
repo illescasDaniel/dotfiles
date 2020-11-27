@@ -1,0 +1,1 @@
+/home/daniel/.config/qtile/scripts/autorun.sh
