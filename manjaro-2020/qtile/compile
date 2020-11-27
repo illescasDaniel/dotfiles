@@ -1,1 +1,2 @@
-/home/daniel/.config/qtile/compile
+#!/bin/zsh
+python -m py_compile config.py
