@@ -140,6 +140,8 @@ function d-backup-config() {
 	git -C $DOTFILES push github
 }
 
+alias d-bakconf="d-backup-config &"
+
 function d-cd() {
 	cd $1
 	d-list
