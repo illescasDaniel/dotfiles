@@ -136,8 +136,8 @@ function d-backup-config() {
 	else
 		git -C $DOTFILES commit -m "updated"
 	fi
-	git push origin
-	git push github
+	git -C $DOTFILES push origin
+	git -C $DOTFILES push github
 }
 
 function d-cd() {
