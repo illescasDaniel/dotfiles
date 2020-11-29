@@ -1,4 +1,4 @@
-cat ~/.cache/neofetch
+#cat ~/.cache/neofetch
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
@@ -122,13 +122,18 @@ alias d-shardlink="doas ln"
 alias d-symlink="ln -s"
 alias d-ssymlink="doas ln -s"
 
+function d-cd() {
+	cd $1
+	d-list
+}
+
 function d-backup {
-	d-copy $1{,~};
-	echo "Created backup $1.~";
+	d-copy $1{,~}
+	echo "Created backup $1.~"
 }
 
 function d-sbackup {
-	d-scopy $1{,.bak};
+	d-scopy $1{,.bak}
 	echo "Created backup as 'root': $1.bak"
 }
 
@@ -241,7 +246,8 @@ export EDITOR="/usr/bin/nvim"
 
 ##  Extra setup
 # setup node
-source /usr/share/nvm/init-nvm.sh
+#source /usr/share/nvm/init-nvm.sh
+(source /usr/share/nvm/init-nvm.sh &) &> /dev/null
 # setup broot
 source /home/daniel/.config/broot/launcher/bash/br
 
@@ -296,6 +302,5 @@ source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-
-
+neofetch
 
