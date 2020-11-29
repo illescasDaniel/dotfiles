@@ -695,6 +695,7 @@ floating_layout = layout.Floating(float_rules=[
     {'wmclass': 'arcolinux-logout'},
     {'wmclass': 'xfce4-terminal'},
     {'wmclass': 'xfce4-appfinder'},
+    {'wname': 'uGet'},
     {'wname': 'branchdialog'},
     {'wname': 'Open File'},
     {'wname': 'pinentry'},
