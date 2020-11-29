@@ -148,7 +148,7 @@ function d-fast-backup-config() {
 	git -C $DOTFILES push github > /dev/null
 }
 
-alias d-bakconf="d-fast-backup-config &"
+alias d-bakconf="( d-fast-backup-config > /dev/null 2>&1 & )"
 
 function d-cd() {
 	cd $1
