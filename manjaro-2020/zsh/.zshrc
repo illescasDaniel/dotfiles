@@ -140,7 +140,15 @@ function d-backup-config() {
 	git -C $DOTFILES push github
 }
 
-alias d-bakconf="d-backup-config &"
+function d-fast-backup-config() {
+	DOTFILES="/home/daniel/Projects/dotfiles"
+	git -C "$DOTFILES" add -A > /dev/null
+	git -C $DOTFILES commit -m "updated" > /dev/null
+	git -C $DOTFILES push origin > /dev/null
+	git -C $DOTFILES push github > /dev/null
+}
+
+alias d-bakconf="d-fast-backup-config &"
 
 function d-cd() {
 	cd $1
