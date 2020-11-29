@@ -246,8 +246,8 @@ export EDITOR="/usr/bin/nvim"
 
 ##  Extra setup
 # setup node
-#source /usr/share/nvm/init-nvm.sh
-(source /usr/share/nvm/init-nvm.sh &) &> /dev/null
+# This command takes some time :/
+source /usr/share/nvm/init-nvm.sh
 # setup broot
 source /home/daniel/.config/broot/launcher/bash/br
 
@@ -302,5 +302,5 @@ source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-neofetch
+paleofetch
 
