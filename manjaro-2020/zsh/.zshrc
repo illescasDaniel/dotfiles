@@ -7,6 +7,11 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+typeset -U PATH path
+# path=("$HOME/.local/bin" /other/things/in/path "$path[@]")
+path=("$path[@]")
+export PATH
+
 ## Options section
 setopt correct                                                  # Auto correct mistakes
 setopt extendedglob                                             # Extended globbing. Allows using regular expressions with *
@@ -247,7 +252,7 @@ export EDITOR="/usr/bin/nvim"
 ##  Extra setup
 # setup node
 # This command takes some time :/
-source /usr/share/nvm/init-nvm.sh
+# source /usr/share/nvm/init-nvm.sh
 # setup broot
 source /home/daniel/.config/broot/launcher/bash/br
 

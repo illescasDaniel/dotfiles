@@ -128,7 +128,10 @@ keys = [
     # Key(["mod1", "control"], "Next", lazy.spawn('conky-rotate -n')),
     # Key(["mod1", "control"], "Prior", lazy.spawn('conky-rotate -p')),
     # Key([KeyboardKey.ALT.value, KeyboardKey.CONTROL.value], "p", lazy.spawn(f"dmenu_run -i -fn '{CustomFont.TEXT.value}' -h 30 -nb '#222222' -sb '#3366cc' -shf '#000022' -shb '#3366cc' -nhf '#99ccff' -nhb '#222222' -c -l 10")),
-    
+    Key(
+        [KeyboardKey.ALT.value, KeyboardKey.CONTROL.value], "d", 
+        lazy.spawn(f"dmenu_run -i -fn '{CustomFont.TEXT.value}' -h 30 -nb '#222222' -sb '#3366cc' -shf '#000022' -shb '#3366cc' -nhf '#99ccff' -nhb '#222222' -c -l 10")
+    ),
     Key(
         [KeyboardKey.ALT.value, KeyboardKey.CONTROL.value], "t", 
         lazy.group["scratchpad"].dropdown_toggle(CustomDropDown.TERMINAL.value)
@@ -604,8 +607,8 @@ screens = init_screens()
 mouse = [
      Drag([KeyboardKey.SUPER.value], "Button1", lazy.window.set_position_floating(),
          start=lazy.window.get_position()),
-    # Drag([KeyboardKey.SUPER.value], "Button3", lazy.window.set_size_floating(),
-    #     start=lazy.window.get_size())
+     Drag([KeyboardKey.SUPER.value], "Button3", lazy.window.set_size_floating(),
+         start=lazy.window.get_size())
 ]
 
 dgroups_key_binder = None
@@ -695,6 +698,8 @@ floating_layout = layout.Floating(float_rules=[
     {'wmclass': 'arcolinux-logout'},
     {'wmclass': 'xfce4-terminal'},
     {'wmclass': 'xfce4-appfinder'},
+    {'wmclass': 'uget-gtk'},
+    {'wmclass': 'Uget-gtk'},
     {'wname': 'uGet'},
     {'wname': 'branchdialog'},
     {'wname': 'Open File'},
