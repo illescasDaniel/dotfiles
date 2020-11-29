@@ -8,8 +8,8 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 typeset -U PATH path
-# path=("$HOME/.local/bin" /other/things/in/path "$path[@]")
-path=("$path[@]")
+# prepend to path: path=("$HOME/.local/bin" /other/things/in/path "$path[@]")
+path+=("/home/daniel/.nvm/versions/node/v14.15.0/bin")
 export PATH
 
 ## Options section
