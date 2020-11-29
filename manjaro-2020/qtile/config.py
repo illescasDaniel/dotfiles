@@ -299,7 +299,7 @@ groups = [
     Group(
         name = "3",
         label = "Internet-III",
-        layout = GroupLayout.MAX.value,
+        layout = GroupLayout.BSP.value,
         spawn = CustomApp.BROWSER.value
     ),
     Group(

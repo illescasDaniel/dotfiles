@@ -126,6 +126,19 @@ alias d-hardlink="ln"
 alias d-shardlink="doas ln"
 alias d-symlink="ln -s"
 alias d-ssymlink="doas ln -s"
+alias d-zsh="d-edit .zshrc"
+
+function d-backup-config() {
+	DOTFILES="/home/daniel/Projects/dotfiles"
+	git -C "$DOTFILES" add -A
+	if [[ $# -eq 1 && "$1" != "" ]]; then
+		git -C $DOTFILES commit -m "$1"
+	else
+		git -C $DOTFILES commit -m "updated"
+	fi
+	git push origin
+	git push github
+}
 
 function d-cd() {
 	cd $1
