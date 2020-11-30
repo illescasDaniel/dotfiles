@@ -1,12 +1,11 @@
-#cat ~/.cache/neofetch
-
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+	source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+## Paths and exports
 typeset -U PATH path
 # prepend to path: path=("$HOME/.local/bin" /other/things/in/path "$path[@]")
 path+=("/home/daniel/.nvm/versions/node/v14.15.0/bin")
@@ -43,12 +42,12 @@ bindkey -e
 bindkey '^[[7~' beginning-of-line                               # Home key
 bindkey '^[[H' beginning-of-line                                # Home key
 if [[ "${terminfo[khome]}" != "" ]]; then
-  bindkey "${terminfo[khome]}" beginning-of-line                # [Home] - Go to beginning of line
+	bindkey "${terminfo[khome]}" beginning-of-line                # [Home] - Go to beginning of line
 fi
 bindkey '^[[8~' end-of-line                                     # End key
 bindkey '^[[F' end-of-line                                     # End key
 if [[ "${terminfo[kend]}" != "" ]]; then
-  bindkey "${terminfo[kend]}" end-of-line                       # [End] - Go to end of line
+	bindkey "${terminfo[kend]}" end-of-line                       # [End] - Go to end of line
 fi
 bindkey '^[[2~' overwrite-mode                                  # Insert key
 bindkey '^[[3~' delete-char                                     # Delete key
@@ -74,7 +73,7 @@ alias gitu='git add . && git commit && git push'
 alias d-windowName="xprop | grep WM_NAME"
 alias d-windowClass="xprop | grep WM_CLASS"
 alias vim="nvim"
-alias vi="nvim"
+# alias vi="nvim"
 alias d-man="tldr"
 alias d-findPackage="apt list -a"
 alias d-clangc="clang++ -Wall -std=c++17"
@@ -84,6 +83,7 @@ alias d-pm-update="doas pacman -Sy"
 alias d-pm-clean="doas pacman -Rns $(pacman -Qdtq)"
 alias d-yay-install="yay -Syu"
 alias d-yay-search="yay -Ss"
+alias d-yay-clean="yay -Yc"
 alias d-pm-upgrade="doas pacman -Syu"
 alias d-yay-upgrade="yay -Syu"
 alias d-yay-remove="yay -Rns"
@@ -208,48 +208,48 @@ GIT_PROMPT_MODIFIED="%{$fg_bold[yellow]%}●%{$reset_color%}"     # yellow circl
 GIT_PROMPT_STAGED="%{$fg_bold[green]%}●%{$reset_color%}"        # green circle   - staged changes present = ready for "git push"
 
 parse_git_branch() {
-  # Show Git branch/tag, or name-rev if on detached head
-  ( git symbolic-ref -q HEAD || git name-rev --name-only --no-undefined --always HEAD ) 2> /dev/null
+	# Show Git branch/tag, or name-rev if on detached head
+	( git symbolic-ref -q HEAD || git name-rev --name-only --no-undefined --always HEAD ) 2> /dev/null
 }
 
 parse_git_state() {
-  # Show different symbols as appropriate for various Git repository states
-  # Compose this value via multiple conditional appends.
-  local GIT_STATE=""
-  local NUM_AHEAD="$(git log --oneline @{u}.. 2> /dev/null | wc -l | tr -d ' ')"
-  if [ "$NUM_AHEAD" -gt 0 ]; then
-    GIT_STATE=$GIT_STATE${GIT_PROMPT_AHEAD//NUM/$NUM_AHEAD}
-  fi
-  local NUM_BEHIND="$(git log --oneline ..@{u} 2> /dev/null | wc -l | tr -d ' ')"
-  if [ "$NUM_BEHIND" -gt 0 ]; then
-    GIT_STATE=$GIT_STATE${GIT_PROMPT_BEHIND//NUM/$NUM_BEHIND}
-  fi
-  local GIT_DIR="$(git rev-parse --git-dir 2> /dev/null)"
-  if [ -n $GIT_DIR ] && test -r $GIT_DIR/MERGE_HEAD; then
-    GIT_STATE=$GIT_STATE$GIT_PROMPT_MERGING
-  fi
-  if [[ -n $(git ls-files --other --exclude-standard 2> /dev/null) ]]; then
-    GIT_STATE=$GIT_STATE$GIT_PROMPT_UNTRACKED
-  fi
-  if ! git diff --quiet 2> /dev/null; then
-    GIT_STATE=$GIT_STATE$GIT_PROMPT_MODIFIED
-  fi
-  if ! git diff --cached --quiet 2> /dev/null; then
-    GIT_STATE=$GIT_STATE$GIT_PROMPT_STAGED
-  fi
-  if [[ -n $GIT_STATE ]]; then
-    echo "$GIT_PROMPT_PREFIX$GIT_STATE$GIT_PROMPT_SUFFIX"
-  fi
+	# Show different symbols as appropriate for various Git repository states
+	# Compose this value via multiple conditional appends.
+	local GIT_STATE=""
+	local NUM_AHEAD="$(git log --oneline @{u}.. 2> /dev/null | wc -l | tr -d ' ')"
+	if [ "$NUM_AHEAD" -gt 0 ]; then
+		GIT_STATE=$GIT_STATE${GIT_PROMPT_AHEAD//NUM/$NUM_AHEAD}
+	fi
+	local NUM_BEHIND="$(git log --oneline ..@{u} 2> /dev/null | wc -l | tr -d ' ')"
+	if [ "$NUM_BEHIND" -gt 0 ]; then
+		GIT_STATE=$GIT_STATE${GIT_PROMPT_BEHIND//NUM/$NUM_BEHIND}
+	fi
+	local GIT_DIR="$(git rev-parse --git-dir 2> /dev/null)"
+	if [ -n $GIT_DIR ] && test -r $GIT_DIR/MERGE_HEAD; then
+		GIT_STATE=$GIT_STATE$GIT_PROMPT_MERGING
+	fi
+	if [[ -n $(git ls-files --other --exclude-standard 2> /dev/null) ]]; then
+		GIT_STATE=$GIT_STATE$GIT_PROMPT_UNTRACKED
+	fi
+	if ! git diff --quiet 2> /dev/null; then
+		GIT_STATE=$GIT_STATE$GIT_PROMPT_MODIFIED
+	fi
+	if ! git diff --cached --quiet 2> /dev/null; then
+		GIT_STATE=$GIT_STATE$GIT_PROMPT_STAGED
+	fi
+	if [[ -n $GIT_STATE ]]; then
+		echo "$GIT_PROMPT_PREFIX$GIT_STATE$GIT_PROMPT_SUFFIX"
+	fi
 }
 
 git_prompt_string() {
-  local git_where="$(parse_git_branch)"
-  
-  # If inside a Git repository, print its branch and state
-  [ -n "$git_where" ] && echo "$GIT_PROMPT_SYMBOL$(parse_git_state)$GIT_PROMPT_PREFIX%{$fg[yellow]%}${git_where#(refs/heads/|tags/)}$GIT_PROMPT_SUFFIX"
-  
-  # If not inside the Git repo, print exit codes of last command (only if it failed)
-  [ ! -n "$git_where" ] && echo "%{$fg[red]%} %(?..[%?])"
+	local git_where="$(parse_git_branch)"
+
+	# If inside a Git repository, print its branch and state
+	[ -n "$git_where" ] && echo "$GIT_PROMPT_SYMBOL$(parse_git_state)$GIT_PROMPT_PREFIX%{$fg[yellow]%}${git_where#(refs/heads/|tags/)}$GIT_PROMPT_SUFFIX"
+
+	# If not inside the Git repo, print exit codes of last command (only if it failed)
+	[ ! -n "$git_where" ] && echo "%{$fg[red]%} %(?..[%?])"
 }
 
 # Right prompt with exit status of previous command if not successful
@@ -294,12 +294,12 @@ bindkey '^[[B' history-substring-search-down
 
 # Apply different settigns for different terminals
 case $(basename "$(cat "/proc/$PPID/comm")") in
-  login)
-    	RPROMPT="%{$fg[red]%} %(?..[%?])" 
-    	alias x='startx ~/.xinitrc'      # Type name of desired desktop after x, xinitrc is configured for it
-    ;;
-#  'tmux: server')
-#        RPROMPT='$(git_prompt_string)'
+	login)
+		RPROMPT="%{$fg[red]%} %(?..[%?])" 
+		alias x='startx ~/.xinitrc'      # Type name of desired desktop after x, xinitrc is configured for it
+	;;
+#	'tmux: server')
+#	RPROMPT='$(git_prompt_string)'
 #		## Base16 Shell color themes.
 #		#possible themes: 3024, apathy, ashes, atelierdune, atelierforest, atelierhearth,
 #		#atelierseaside, bespin, brewer, chalk, codeschool, colors, default, eighties, 
@@ -314,15 +314,15 @@ case $(basename "$(cat "/proc/$PPID/comm")") in
 #		# Use autosuggestion
 #		source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 #		ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
-#  		ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'
-#     ;;
-  *)
-        RPROMPT='$(git_prompt_string)'
+#		ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'
+#	;;
+	*)
+		RPROMPT='$(git_prompt_string)'
 		# Use autosuggestion
 		source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 		ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
-  		ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'
-    ;;
+		ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'
+	;;
 esac
 
 source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
