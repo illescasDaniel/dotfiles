@@ -17,6 +17,7 @@ Plug 'mxw/vim-jsx'
 Plug 'othree/html5.vim'
 Plug 'vim-language-dept/css-syntax.vim'
 Plug 'mattn/emmet-vim'
+Plug 'dag/vim-fish'
 
 Plug 'turbio/bracey.vim', {'do': 'npm install --prefix server'}
 Plug 'MattesGroeger/vim-bookmarks'
