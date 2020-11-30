@@ -4,6 +4,7 @@ set EDITOR /usr/bin/nvim
 set TERMINAL /usr/bin/kitty
 set VISUAL /usr/bin/nvim
 set BROWSER /usr/bin/firefox
+set SHELL /usr/bin/fish
 set PATH ~/.nvm/versions/node/v14.15.0/bin $PATH
 # or: export PATH=/home/daniel/.nvm/versions/node/v14.15.0/bin:$PATH
 
@@ -32,15 +33,40 @@ function d-fast-backup-config -d "Backup my config files without output"
 	git -C $DOTFILES push github > /dev/null
 end
 
+function d-cd
+	cd $argv[1]
+	d-list
+end
+
+function d-backup
+	d-copy $1{,~}
+	echo "Created backup $1.~"
+end
+
+function d-sbackup
+	d-scopy $1{,.bak}
+	echo "Created backup as 'root': $1.bak"
+end
+
+function d-copyclip
+	xclip -sel c < $1 
+end
+
+function d-scopyclip
+	doas xclip -sel c < $1
+end
+
 # - end Functions #
 
 
 ### Aliases ##
 
-alias d-windowName="xprop | grep WM_NAME"
-alias d-windowClass="xprop | grep WM_CLASS"
+alias br="broot"
 alias vim="nvim"
 # alias vi="nvim"
+
+alias d-windowName="xprop | grep WM_NAME"
+alias d-windowClass="xprop | grep WM_CLASS"
 alias d-man="tldr"
 alias d-findPackage="apt list -a"
 alias d-clangc="clang++ -Wall -std=c++17"
@@ -100,6 +126,7 @@ alias d-fish="d-edit ~/.config/fish/config.fish"
 ### Abbreviations ###
 
 abbr git-acp 'git add . && git commit -m "updated" && git push'
+abbr cd 'd-cd'
 
 # - end Abbreviations #
 
