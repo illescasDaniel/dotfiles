@@ -23,7 +23,7 @@ Plug 'turbio/bracey.vim', {'do': 'npm install --prefix server'}
 Plug 'MattesGroeger/vim-bookmarks'
 Plug 'tpope/vim-fugitive'
 Plug 'preservim/nerdtree'
-Plug 'chrisbra/Colorizer'
+" Plug 'chrisbra/Colorizer'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " you need to install a lot of coc plugins for this. For python you need pip and jedi
 call plug#end()
@@ -78,7 +78,7 @@ if (has("termguicolors"))
 endif
 
 " Theme setup
-" set background=dark
+set background=dark
 set cursorline
 
 function SetPaleNight()

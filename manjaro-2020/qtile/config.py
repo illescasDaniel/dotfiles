@@ -25,7 +25,6 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-
 import os
 import re
 import socket
@@ -567,6 +566,21 @@ def init_widgets_list():
                         background = colors[1]
                         ),
                # widget.Volume(),
+               widget.LaunchBar(
+                    progs = [
+                        ("  ", "xfce4-settings-manager", "Settings"),
+                        ("  ", "systemctl suspend", "Suspend"),
+                        ("  ", "systemctl poweroff", "Power Off")
+                    ], 
+                    background = colors[1],
+                    padding = 0
+               ),
+               widget.Sep(
+                        linewidth = 1,
+                        padding = 10,
+                        foreground = colors[2],
+                        background = colors[1]
+                        ),
                widget.Systray(
                         background = colors[1],
                         icon_size = 27,

@@ -62,7 +62,7 @@ end
 ### Aliases ##
 
 alias br="broot"
-alias vim="nvim"
+# alias vim="nvim"
 # alias vi="nvim"
 
 alias d-windowName="xprop | grep WM_NAME"
