@@ -133,6 +133,6 @@ abbr cd 'd-cd'
 
 ### Autostart commands ###
 fish_vi_key_bindings # vi mode
-paleofetch			 # display pc info
+# paleofetch			 # display pc info
 
 # - end Autostart commands # 

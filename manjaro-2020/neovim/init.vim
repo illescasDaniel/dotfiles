@@ -4,13 +4,13 @@ call plug#begin(stdpath('data') . '/plugged')
 " Theming
 " Plug 'itchyny/lightline.vim'
 Plug 'vim-airline/vim-airline'
-"Plug 'vim-airline/vim-airline-themes'
+" "Plug 'vim-airline/vim-airline-themes'
 Plug 'morhetz/gruvbox'
 Plug 'joshdick/onedark.vim'
 Plug 'KeitaNakamura/neodark.vim' " Good for Ruby
 Plug 'larsbs/vimterial_dark'
 Plug 'drewtempelmeyer/palenight.vim'
-
+ 
 " Improve languages syntax highlight
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
@@ -45,9 +45,9 @@ set list
 set listchars=tab:\|\ ,space:·,nbsp:␣,trail:•,eol:¶,precedes:«,extends:»
 highlight SpecialKey ctermfg=8 guifg=DimGrey
 
-set foldmethod=syntax
-set foldminlines=30
-set foldnestmax=4
+" set foldmethod=syntax
+" set foldminlines=30
+" set foldnestmax=4
 
 " ######################## Files ########################
 " au => autocmd
@@ -55,10 +55,11 @@ set foldnestmax=4
 " au FileType html set omnifunc=htmlcomplete#CompleteTags
 " au FileType css set omnifunc=csscomplete#CompleteCSS
 " au FileType php set omnifunc=phpcomplete#CompletePHP
+
 au FileType ruby call SetNeoDarkTheme()
-" au FileType vim colorscheme neodark
 au FileType javascript call SetVimterialTheme()
 au FileType html call SetVimterialTheme()
+
 " autocomplete with </   :iabbrev </ </<C-X><C-O>
 
 " ######################## THEMING ########################
@@ -77,7 +78,7 @@ if (has("termguicolors"))
 endif
 
 " Theme setup
-set background=dark
+" set background=dark
 set cursorline
 
 function SetPaleNight()
@@ -126,7 +127,7 @@ autocmd FileType html,css,jsx,javascriptreact EmmetInstall
 
 " ######################## Abbreviations and maps ########################
 
-" Vim bookmarks customization
+" Vim bookmarks customization:
 nmap <Leader><Leader> <Plug>BookmarkToggle
 nmap <Leader>i <Plug>BookmarkAnnotate
 nmap <Leader>a <Plug>BookmarkShowAll
