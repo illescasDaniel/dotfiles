@@ -38,6 +38,6 @@ if (command -v system-config-printer-applet && ! pgrep applet.py ); then
 fi
 
 ## run compton --shadow-exclude '!focused'
-run picom -b --backend glx --vsync # --shadow-exclude '!focused'
+run picom -b --experimental-backends --backend glx --vsync # --shadow-exclude '!focused'
 run blueman-applet
 run msm_notifier
