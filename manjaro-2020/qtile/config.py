@@ -569,6 +569,7 @@ def init_widgets_list():
                widget.LaunchBar(
                     progs = [
                         ("  ", "xfce4-settings-manager", "Settings"),
+                        ('  ', 'qshell:self.qtile.cmd_shutdown()', 'Logout from qtile'),
                         ("  ", "systemctl suspend", "Suspend"),
                         ("  ", "systemctl poweroff", "Power Off")
                     ], 
