@@ -350,15 +350,15 @@ for i in groups[1:]:
 # LAYOUT
 
 default_layout_config = dict(
-        margin = 5,
-        border_width = 2,
+        margin = 6,
+        border_width = 3,
         border_focus = "#5e81ac",
         border_normal = "#4c566a"
 )
 
 layouts = [
-    layout.MonadTall(margin=8, border_width=2, border_focus="#5e81ac", border_normal="#4c566a"),
-    layout.MonadWide(margin=8, border_width=2, border_focus="#5e81ac", border_normal="#4c566a"),
+    layout.MonadTall(**default_layout_config),
+    layout.MonadWide(**default_layout_config),
     layout.Matrix(**default_layout_config),
     layout.Bsp(**default_layout_config),
     layout.Floating(**default_layout_config),
@@ -640,7 +640,8 @@ mouse = [
      Drag([KeyboardKey.SUPER.value], "Button1", lazy.window.set_position_floating(),
          start=lazy.window.get_position()),
      Drag([KeyboardKey.SUPER.value], "Button3", lazy.window.set_size_floating(),
-         start=lazy.window.get_size())
+         start=lazy.window.get_size()),
+     Click([KeyboardKey.SUPER.value], "Button2", lazy.window.toggle_floating())
 ]
 
 dgroups_key_binder = None
