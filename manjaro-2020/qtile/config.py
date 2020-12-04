@@ -300,7 +300,7 @@ groups = [
     Group(
         name = "3",
         label = "Internet-III",
-        layout = GroupLayout.BSP.value,
+        layout = GroupLayout.MONADTALL.value,
         spawn = CustomApp.BROWSER.value
     ),
     Group(
@@ -321,7 +321,7 @@ groups = [
     Group(
         name = "7",
         label = "Office-VII",
-        layout = GroupLayout.MONADTALL.value,
+        layout = GroupLayout.RATIO_TILE.value,
         spawn = CustomApp.FILE_MANAGER.value
     ),
     Group(
@@ -357,7 +357,7 @@ default_layout_config = dict(
 )
 
 layouts = [
-    layout.MonadTall(**default_layout_config),
+    layout.MonadTall(single_border_width = 0, ratio = 0.6, single_margin = 0, **default_layout_config),
     layout.MonadWide(**default_layout_config),
     layout.Matrix(**default_layout_config),
     layout.Bsp(**default_layout_config),
