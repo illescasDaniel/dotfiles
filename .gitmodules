@@ -1,0 +1,3 @@
+[submodule "manjaro-2020/qutebrowser/dracula"]
+	path = manjaro-2020/qutebrowser/dracula
+	url = https://github.com/dracula/qutebrowser
