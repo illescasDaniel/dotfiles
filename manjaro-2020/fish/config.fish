@@ -62,9 +62,6 @@ end
 ### Aliases ##
 
 alias br="broot"
-# alias vim="nvim"
-# alias vi="nvim"
-
 alias d-windowName="xprop | grep WM_NAME"
 alias d-windowClass="xprop | grep WM_CLASS"
 alias d-man="tldr"
@@ -86,6 +83,8 @@ alias d-list-trash="gio list -lh trash://"
 alias d-open="gio open"
 alias d-show="bat"
 alias d-edit="nvim"
+alias d-editcsv="sc-im"
+alias d-seditcsv="sc-im"
 alias d-sedit="doas nvim"
 alias d-editT="nvim -p"
 alias d-seditT="doas nvim -p"

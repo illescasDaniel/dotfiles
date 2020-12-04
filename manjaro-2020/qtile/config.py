@@ -74,6 +74,7 @@ class CustomApp(Enum):
     FILE_MANAGER = "thunar"
     MUSIC = "spotify"
     PASS_MANAGER = "enpass"
+    MINI_CALENDAR = "gsimplecal"
 
 class CustomDropDown(Enum):
     TERMINAL = "terminal"
@@ -111,6 +112,7 @@ keys = [
     Key([KeyboardKey.SUPER.value], "s", lazy.spawn('xfce4-settings-manager')),
     Key([KeyboardKey.SUPER.value], "u", lazy.spawn("pamac-manager")),
     Key([KeyboardKey.SUPER.value], "m", lazy.spawn(CustomApp.MUSIC.value)),
+ 
     # Key([KeyboardKey.SUPER.value], "r", lazy.spawn('rofi-theme-selector')),
     #Key([mod], "F11", lazy.spawn('rofi -show run -fullscreen')),
     #Key([mod], "F12", lazy.spawn('rofi -show run')),
@@ -287,7 +289,7 @@ groups = [
     Group(
         name = "1",
         label = "Start-I",
-        layout = GroupLayout.BSP.value
+        layout = GroupLayout.FLOATING.value
     ),
     Group(
         name = "2",
@@ -325,7 +327,7 @@ groups = [
     Group(
         name = "8",
         label = "Other",
-        layout = GroupLayout.BSP.value
+        layout = GroupLayout.FLOATING.value
     )
 ]
 
@@ -389,6 +391,18 @@ widget_defaults = dict(
     fontsize = 16,
     background = colors[1]
 )
+
+def open_calendar(qtile):
+    qtile.cmd_spawn(CustomApp.MINI_CALENDAR.value)
+
+def close_calendar(qtile):
+    qtile.cmd_spawn(f"killall -q {CustomApp.MINI_CALENDAR.value}")
+
+def open_taskmanager(qtile):
+    qtile.cmd_spawn("xfce4-taskmanager")
+
+def open_htop(qtile):
+    qtile.cmd_spawn(f"{CustomApp.TERMINAL.value} -e htop")
 
 def init_widgets_list():
     prompt = "{0}@{1}: ".format(os.environ["USER"], socket.gethostname())
@@ -514,7 +528,8 @@ def init_widgets_list():
                         border_width = 1,
                         line_width = 1,
                         core = "all",
-                        type = "box"
+                        type = "box",
+                        mouse_callbacks = dict(Button1 = open_htop)
                         ),
                widget.Sep(
                         linewidth = 1,
@@ -537,6 +552,7 @@ def init_widgets_list():
                         fontsize = 16,
                         foreground = colors[5],
                         background = colors[1],
+                        mouse_callbacks = dict(Button1 = open_taskmanager)
                        ),
                widget.Sep(
                         linewidth = 1,
@@ -557,7 +573,8 @@ def init_widgets_list():
                         foreground = colors[5],
                         background = colors[1],
                         fontsize = 16,
-                        format = "%Y-%m-%d %H:%M"
+                        format = "%Y-%m-%d %H:%M",
+                        mouse_callbacks = {'Button1': open_calendar, 'Button3': close_calendar}
                         ),
                widget.Sep(
                         linewidth = 1,
@@ -683,17 +700,24 @@ def start_always():
 
 @hook.subscribe.client_new
 def set_floating(window):
-    if (window.window.get_wm_transient_for()
-            or window.window.get_wm_type() in floating_types):
+    if (window.window.get_wm_transient_for() or window.window.get_wm_type() in floating_types):
         window.floating = True
 
-floating_types = ["notification", "toolbar", "splash", "dialog"]
+@hook.subscribe.client_managed
+def set_windows_positions(window):
+    window_class = window.window.get_wm_class()[0]
+    if (window_class == 'xfce4-appfinder'):
+        window.tweak_float(x=0, y=30, dx=0, dy=0, w=500, h=500, dw=0, dh=0)
+    if (window_class == 'gsimplecal'):
+        window.tweak_float(x=2050, y=30, dx=0, dy=0, w=0, h=0, dw=0, dh=0)
 
+floating_types = ["notification", "toolbar", "splash", "dialog"]
 
 follow_mouse_focus = True
 bring_front_click = False
 cursor_warp = False
-floating_layout = layout.Floating(float_rules=[
+floating_layout = layout.Floating(
+  float_rules = [
     {'wmclass': 'Arcolinux-welcome-app.py'},
     {'wmclass': 'Arcolinux-tweak-tool.py'},
     {'wmclass': 'confirm'},
@@ -715,13 +739,18 @@ floating_layout = layout.Floating(float_rules=[
     {'wmclass': 'xfce4-appfinder'},
     {'wmclass': 'uget-gtk'},
     {'wmclass': 'Uget-gtk'},
+    {'wmclass': 'krunner'},
+    {'wmclass': 'gsimplecal'},
     {'wname': 'uGet'},
     {'wname': 'branchdialog'},
     {'wname': 'Open File'},
     {'wname': 'pinentry'},
     {'wmclass': 'ssh-askpass'},
+  ],  
+  fullscreen_border_width = 0, 
+  border_width = 0
+)
 
-],  fullscreen_border_width = 0, border_width = 0)
 auto_fullscreen = True
 
 focus_on_window_activation = "focus" # or smart

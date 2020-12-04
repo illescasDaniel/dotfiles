@@ -21,7 +21,7 @@ if (command -v  xfce4-power-manager && ! pgrep xfce4-power-man) ; then
     xfce4-power-manager &
 fi
 
-run xfsettingsd
+# run xfsettingsd
 run nm-applet
 run light-locker
 run xcape -e 'Super_L=Super_L|Control_L|Escape'
@@ -41,3 +41,4 @@ fi
 run picom -b --experimental-backends --backend glx --vsync # --shadow-exclude '!focused'
 run blueman-applet
 run msm_notifier
+
