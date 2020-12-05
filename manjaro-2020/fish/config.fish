@@ -139,6 +139,7 @@ alias d-ssymlink="doas ln -s"
 alias d-zsh="d-edit ~/.zshrc"
 alias d-fish="d-edit ~/.config/fish/config.fish"
 alias d-vim="d-edit ~/.config/nvim/init.vim"
+alias d-qtile="d-edit ~/.config/qtile/config.py"
 
 # - end Aliases #
 

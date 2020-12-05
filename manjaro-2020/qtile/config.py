@@ -602,7 +602,7 @@ def init_widgets_list():
                widget.Systray(
                         background = colors[1],
                         icon_size = 27,
-                        padding = 4
+                        padding = 8
                         ),
                widget.Spacer(length = 8, background = colors[1])
               ]
