@@ -25,19 +25,27 @@ Plug 'tpope/vim-fugitive'
 Plug 'preservim/nerdtree'
 " Plug 'chrisbra/Colorizer'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-" you need to install a lot of coc plugins for this. For python you need pip and jedi
+" you need to install a lot of coc plugins for this. For python you need pip and jedi (?), coc-pyright for python with mypy works great
 call plug#end()
 
 " ######################## Basic config ########################
 syntax on
+
 set number relativenumber
 set mouse=a
 set noexpandtab
-set copyindent
+set autoindent " copyindent
 set preserveindent
-set softtabstop=0
+set softtabstop=4
 set shiftwidth=4
 set tabstop=4
+
+function SetTabs()
+	set noexpandtab
+	set softtabstop=4
+	set shiftwidth=4
+	set tabstop=4
+endfunction
 
 " Invisible characters
 set list
@@ -56,9 +64,10 @@ highlight SpecialKey ctermfg=8 guifg=DimGrey
 " au FileType css set omnifunc=csscomplete#CompleteCSS
 " au FileType php set omnifunc=phpcomplete#CompletePHP
 
-au FileType ruby call SetNeoDarkTheme()
-au FileType javascript call SetVimterialTheme()
-au FileType html call SetVimterialTheme()
+autocmd FileType ruby call SetNeoDarkTheme()
+autocmd FileType javascript call SetVimterialTheme()
+autocmd FileType html call SetVimterialTheme()
+autocmd FileType * call SetTabs()
 
 " autocomplete with </   :iabbrev </ </<C-X><C-O>
 
@@ -143,3 +152,4 @@ nmap <Leader>g <Plug>BookmarkMoveToLine
 
 " Nerdtree config
 map <C-n> :NERDTreeToggle<CR>
+

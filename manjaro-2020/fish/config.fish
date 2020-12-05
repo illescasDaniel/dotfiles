@@ -56,6 +56,26 @@ function d-scopyclip
 	doas xclip -sel c < $1
 end
 
+function d-python --argument-names file_name --description "Compile, type check and run python file"
+	python3 -m py_compile $file_name
+	if test $status != 0
+		return 1
+	end
+	mypy $file_name
+	if test $status != 0
+		return 2
+	end
+	python3 $file_name
+end
+
+function d-clang --argument-names file_name
+	d-clangc $file_name -o $file_name".out"
+	if test $status != 0
+		return 1
+	end
+	./$file_name".out"
+end
+
 # - end Functions #
 
 
@@ -118,6 +138,7 @@ alias d-symlink="ln -s"
 alias d-ssymlink="doas ln -s"
 alias d-zsh="d-edit ~/.zshrc"
 alias d-fish="d-edit ~/.config/fish/config.fish"
+alias d-vim="d-edit ~/.config/nvim/init.vim"
 
 # - end Aliases #
 
@@ -126,6 +147,7 @@ alias d-fish="d-edit ~/.config/fish/config.fish"
 
 abbr git-acp 'git add . && git commit -m "updated" && git push'
 abbr cd 'd-cd'
+abbr ll 'd-list'
 
 # - end Abbreviations #
 
