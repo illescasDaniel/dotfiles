@@ -38,22 +38,17 @@ function d-cd
 	d-list
 end
 
-function d-backup
-	d-copy $1{,~}
-	echo "Created backup $1.~"
+function d-backup --argument-names file_name
+	cp $file_name{,~}
+	echo "Created backup $file_name~"
 end
 
-function d-sbackup
-	d-scopy $1{,.bak}
-	echo "Created backup as 'root': $1.bak"
+function d-copyclip --argument-names file_name
+	xclip -sel c < $file_name 
 end
 
-function d-copyclip
-	xclip -sel c < $1 
-end
-
-function d-scopyclip
-	doas xclip -sel c < $1
+function d-scopyclip --argument-names file_name
+	doas xclip -sel c < $file_name
 end
 
 function d-python --argument-names file_name --description "Compile, type check and run python file"
@@ -86,7 +81,7 @@ alias d-windowName="xprop | grep WM_NAME"
 alias d-windowClass="xprop | grep WM_CLASS"
 alias d-man="tldr"
 alias d-findPackage="apt list -a"
-alias d-clangc="clang++ -Wall -std=c++17"
+alias d-clangc="clang++ -Wall -std=c++17 -O3"
 alias d-pm-install="doas pacman -Syu"
 alias d-pm-search="pacman -Ss"
 alias d-pm-update="doas pacman -Sy"
@@ -155,6 +150,7 @@ abbr ll 'd-list'
 
 ### Autostart commands ###
 fish_vi_key_bindings # vi mode
+cppfetch # Custom script to display pc info
 # paleofetch			 # display pc info
 
 # - end Autostart commands # 
