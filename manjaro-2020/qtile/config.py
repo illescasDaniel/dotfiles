@@ -62,6 +62,16 @@ class GroupLayout(Enum):
 	FLOATING = "floating"
 	RATIO_TILE = "ratiotile"
 
+class GroupName(Enum):
+	START = "1"
+	SYSTEM = "2"
+	INTERNET = "3"
+	CODING = "4"
+	GAMING = "5"
+	MEDIA = "6"
+	OFFICE = "7"
+	OTHER = "8"
+
 class CustomFont(Enum):
 	TEXT = "Fira Sans"
 	TEXT_BOLD = "Fira Sans Bold"
@@ -277,45 +287,45 @@ groups = [
 		]
 	),
 	Group(
-		name = "1",
+		name = GroupName.START.value,
 		label = "Start-I",
 		layout = GroupLayout.FLOATING.value
 	),
 	Group(
-		name = "2",
+		name = GroupName.SYSTEM.value,
 		label = "System",
 		layout = GroupLayout.BSP.value,
 		spawn = CustomApp.TERMINAL.value
 	),
 	Group(
-		name = "3",
+		name = GroupName.INTERNET.value,
 		label = "Internet-III",
 		layout = GroupLayout.MONADTALL.value,
 		spawn = CustomApp.BROWSER.value
 	),
 	Group(
-		name = "4",
+		name = GroupName.CODING.value,
 		label = "Coding",
 		layout = GroupLayout.BSP.value
 	),
 	Group(
-		name = "5",
+		name = GroupName.GAMING.value,
 		label = "Gaming-V",
 		layout = GroupLayout.MAX.value
 	),
 	Group(
-		name = "6",
+		name = GroupName.MEDIA.value,
 		label = "Media",
 		layout = GroupLayout.FLOATING.value
 	),
 	Group(
-		name = "7",
+		name = GroupName.OFFICE.value,
 		label = "Office-VII",
 		layout = GroupLayout.RATIO_TILE.value,
 		spawn = CustomApp.FILE_MANAGER.value
 	),
 	Group(
-		name = "8",
+		name = GroupName.OTHER.value,
 		label = "Other",
 		layout = GroupLayout.FLOATING.value
 	)
@@ -635,43 +645,22 @@ mouse = [
 dgroups_key_binder = None
 dgroups_app_rules = []
 
-# ASSIGN APPLICATIONS TO A SPECIFIC GROUPNAME
-# BEGIN
+# Hooks
 
-# @hook.subscribe.client_new
-# def assign_app_group(client):
-#	d = {}
-#	#########################################################
-#	################ assgin apps to groups ##################
-#	#########################################################
-#	d["1"] = ["Navigator", "Firefox", "Vivaldi-stable", "Vivaldi-snapshot", "Chromium", "Google-chrome", "Brave", "Brave-browser",
-#			"navigator", "firefox", "vivaldi-stable", "vivaldi-snapshot", "chromium", "google-chrome", "brave", "brave-browser", ]
-#	d["2"] = [ "Atom", "Subl3", "Geany", "Brackets", "Code-oss", "Code", "TelegramDesktop", "Discord",
-#			"atom", "subl3", "geany", "brackets", "code-oss", "code", "telegramDesktop", "discord", ]
-#	d["3"] = ["Inkscape", "Nomacs", "Ristretto", "Nitrogen", "Feh",
-#			"inkscape", "nomacs", "ristretto", "nitrogen", "feh", ]
-#	d["4"] = ["Gimp", "gimp" ]
-#	d["5"] = ["Meld", "meld", "org.gnome.meld" "org.gnome.Meld" ]
-#	d["6"] = ["Vlc","vlc", "Mpv", "mpv" ]
-#	d["7"] = ["VirtualBox Manager", "VirtualBox Machine", "Vmplayer",
-#			"virtualbox manager", "virtualbox machine", "vmplayer", ]
-#	d["8"] = ["Thunar", "Nemo", "Caja", "Nautilus", "org.gnome.Nautilus", "Pcmanfm", "Pcmanfm-qt",
-#			"thunar", "nemo", "caja", "nautilus", "org.gnome.nautilus", "pcmanfm", "pcmanfm-qt", ]
-#	d["9"] = ["Evolution", "Geary", "Mail", "Thunderbird",
-#			"evolution", "geary", "mail", "thunderbird" ]
-#	d["0"] = ["Spotify", "Pragha", "Clementine", "Deadbeef", "Audacious",
-#			"spotify", "pragha", "clementine", "deadbeef", "audacious" ]
-#	##########################################################
-#	wm_class = client.window.get_wm_class()[0]
-#	
-#	for i in range(len(d)):
-#		if wm_class in list(d.values())[i]:
-#			group = list(d.keys())[i]
-#			client.togroup(group)
-#			client.group.cmd_toscreen()
+@hook.subscribe.client_new
+def assign_app_group(client):
+	
+	programs_for_groups = {
+		GroupName.GAMING.value: ['steam', 'Minecraft Launcher', 'minecraft-launcher']	
+	}
 
-# END
-# ASSIGN APPLICATIONS TO A SPECIFIC GROUPNAME
+	wm_class = client.window.get_wm_class()[0]
+	
+	for i in range(len(programs_for_groups)):
+		if wm_class in list(programs_for_groups.values())[i]:
+			group = list(programs_for_groups.keys())[i]
+			client.togroup(group)
+			client.group.cmd_toscreen()
 
 main = None
 
@@ -697,6 +686,8 @@ def set_windows_positions(window):
 		window.tweak_float(x=0, y=30, dx=0, dy=0, w=500, h=500, dw=0, dh=0)
 	if (window_class == 'gsimplecal'):
 		window.tweak_float(x=2050, y=30, dx=0, dy=0, w=0, h=0, dw=0, dh=0)
+
+# Other settings
 
 floating_types = ["notification", "toolbar", "splash", "dialog"]
 
