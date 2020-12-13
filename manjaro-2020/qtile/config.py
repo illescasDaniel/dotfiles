@@ -103,7 +103,7 @@ keys = [
 	Key([KeyboardKey.SUPER.value], "q", lazy.window.kill()),
 	Key([KeyboardKey.SUPER.value], "d", lazy.spawn(f"dmenu_run -i -fn '{CustomFont.TEXT.value}' -h 30 -nb '#222222' -sb '#3366cc' -shf '#000022' -shb '#3366cc' -nhf '#99ccff' -nhb '#222222'")),
 	Key([KeyboardKey.SUPER.value], "f", lazy.spawn(CustomApp.FILE_MANAGER.value)),
-	Key([KeyboardKey.SUPER.value], "b", lazy.spawn(CustomApp.BROWSER.value)),
+	Key([KeyboardKey.SUPER.value], "b", lazy.spawn(f"gamemoderun {CustomApp.BROWSER.value}")),
 	Key([KeyboardKey.SUPER.value], KeyboardKey.ESCAPE.value, lazy.spawn('xkill')),
 	Key([KeyboardKey.SUPER.value], KeyboardKey.RETURN.value, lazy.spawn(CustomApp.TERMINAL.value)),
 	Key([KeyboardKey.SUPER.value], KeyboardKey.ENTER.value, lazy.spawn(CustomApp.TERMINAL.value)), 
@@ -301,7 +301,7 @@ groups = [
 		name = GroupName.INTERNET.value,
 		label = "Internet-III",
 		layout = GroupLayout.MONADTALL.value,
-		spawn = CustomApp.BROWSER.value
+		spawn = f"gamemoderun {CustomApp.BROWSER.value}"
 	),
 	Group(
 		name = GroupName.CODING.value,

@@ -71,9 +71,11 @@ function d-clang --argument-names file_name
 	./$file_name".out"
 end
 
-function d-glaunch --argument-names game
-	if test $game = "minecraft"
+function d-launch --argument-names program
+	if test $program = "minecraft"
 		mangohud --dlsym gamemoderun minecraft-launcher
+	else if test $program = "firefox"
+		gamemoderun firefox
 	end
 end
 
