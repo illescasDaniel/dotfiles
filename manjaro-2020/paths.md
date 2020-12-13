@@ -6,4 +6,5 @@
 - GTK config: ~/.config/gtk-3.0/settings.ini
 - LightDM: /etc/lightdm/lightdm-gtk-greeter.conf
 - QuteBrowser: ~/.config/qutebrowser
+- Doas: /usr/etc/doas.conf, opendoas: /etc/doas.conf
 
